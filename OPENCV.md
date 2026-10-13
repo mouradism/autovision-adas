@@ -6,7 +6,7 @@
 | **File Name** | `OPENCV.md` |
 | **Target Domain** | Automotive ADAS (SAE Level 2+ / Level 3 Perception) |
 | **Technologies** | OpenCV 4.x (C++17 / Python 3.10), OpenCV DNN, Eigen3, CUDA / SIMD |
-| **Complementary System** | InnoSenT 77 GHz FMCW Radar Multi-Target Tracker ([specification.md](file:///c:/Users/Mourad/Desktop/MOURADCV/InnoSent/specification.md)) |
+| **Complementary System** | 77 GHz FMCW Radar Multi-Target Tracker ([SPEC-SW-RADAR-TRK-001](https://github.com/mouradism/kalman)) |
 | **Performance Target** | Real-time processing at $\ge 30\,\text{FPS}$ ($\le 33\,\text{ms}$ per frame) on 1080p automotive video streams |
 
 ---
@@ -52,7 +52,7 @@
 |                                   v                                                   |
 |   +-------------------------------------------------------------------------------+   |
 |   | 5. CAMERA-RADAR SPATIAL FUSION (Homography & Calibration Matrix)             |   |
-|   |    * Ingest 77 GHz Radar Tracks (x, y, vx, vy) from InnoSenT EKF Tracker      |   |
+|   |    * Ingest 77 GHz Radar Tracks (x, y, vx, vy) from 77 GHz EKF Tracker        |   |
 |   |    * P_proj = K * [R | t] * X_radar                                           |   |
 |   |    * IoU Bounding Box Association & Sensor State Fusion                       |   |
 |   +-------------------------------------------------------------------------------+   |
@@ -104,12 +104,12 @@
 
 ---
 
-### Module 2.4: Camera-Radar Sensor Fusion (The InnoSenT Synergy)
-Cameras provide high angular resolution and semantic classification (vehicle vs. pedestrian), but struggle with direct range and adverse weather. In contrast, **InnoSenT 77 GHz Radar** provides direct Doppler velocity and robust range under all weather conditions, but lacks semantic classes.
+### Module 2.4: Camera-Radar Sensor Fusion (77 GHz Radar Synergy)
+Cameras provide high angular resolution and semantic classification (vehicle vs. pedestrian), but struggle with direct range and adverse weather. In contrast, **77 GHz FMCW Radar** provides direct Doppler velocity and robust range under all weather conditions, but lacks semantic classes.
 
 This module fuses both worlds:
 1. **Coordinate Projection:**
-   Projects the 3D Radar track coordinates $\mathbf{X}_R = [X_R, Y_R, Z_R, 1]^T$ (from the [specification.md](file:///c:/Users/Mourad/Desktop/MOURADCV/InnoSent/specification.md) EKF tracker) into camera pixel coordinates $[u, v]^T$:
+   Projects the 3D Radar track coordinates $\mathbf{X}_R = [X_R, Y_R, Z_R, 1]^T$ (from the 77 GHz EKF tracker) into camera pixel coordinates $[u, v]^T$:
    $$s \begin{bmatrix} u \\ v \\ 1 \end{bmatrix} = \mathbf{K} \cdot \begin{bmatrix} \mathbf{R} & \mathbf{t} \end{bmatrix} \cdot \begin{bmatrix} X_R \\ Y_R \\ Z_R \\ 1 \end{bmatrix}$$
 2. **Track-to-Bounding Box Gating:**
    Verifies whether the projected radar point $(u, v)$ falls inside a detected camera bounding box.
@@ -322,15 +322,15 @@ gantt
 ### Key Deliverables:
 1. **Source Code (`src/`):** Clean, modular C++17 and Python implementations using modern OpenCV best practices.
 2. **Interactive Streamlit / OpenCV GUI:** Interactive demo slider adjusting lane detection thresholds and displaying the HUD output.
-3. **Synthetic Camera-Radar Fusion Demo:** A video demonstration showing camera bounding boxes aligned with InnoSenT radar point clouds.
+3. **Synthetic Camera-Radar Fusion Demo:** A video demonstration showing camera bounding boxes aligned with 77 GHz radar point clouds.
 4. **Benchmarking Report:** Latency, CPU/GPU utilization, and detection accuracy under day, night, and rain scenarios.
 
 ---
 
-## 7. Strategic Value for InnoSenT Application
+## 7. Strategic Engineering Value
 
 Including **AutoVision-ADAS** alongside the **Radar Tracker Specification** demonstrates:
 1. **Holistic ADAS Understanding:** You don't just understand radar in isolation; you understand how modern automotive OEMs fuse **Radar + Camera** for Euro NCAP 5-star ratings (AEB / FCW / LDW).
 2. **C++ & Python Proficiency:** Shows mastery of both rapid prototyping (Python OpenCV) and production deployment (C++ OpenCV).
-3. **Cross-Team Collaboration:** Directly matches InnoSenT's requirement for cross-functional systems engineering with hardware, software, and customer-facing application teams.
+3. **Cross-Team Collaboration:** Directly matches automotive requirements for cross-functional systems engineering with hardware, software, and application teams.
 

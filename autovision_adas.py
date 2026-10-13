@@ -69,7 +69,7 @@ class Obstacle2D:
 
 @dataclass
 class RadarTrackInput:
-    """Target track output from InnoSenT 77 GHz FMCW Radar Tracker."""
+    """Target track output from 77 GHz FMCW Radar Tracker."""
     track_id: int
     x_m: float          # Lateral coordinate in radar frame (meters, right is +)
     y_m: float          # Longitudinal range in radar frame (meters, forward is +)
@@ -339,7 +339,7 @@ class ObstaclePerceptionEngine:
         return [f_tl, f_tr, f_br, f_bl, b_tl, b_tr, b_br, b_bl]
 
 # ==============================================================================
-# Module 2.4: Camera-Radar Extrinsic Sensor Fusion (InnoSenT Synergy)
+# Module 2.4: Camera-Radar Extrinsic Sensor Fusion (77 GHz Radar Synergy)
 # ==============================================================================
 
 class CameraRadarFusionEngine:
@@ -681,7 +681,7 @@ class AdasHudRenderer:
 class SyntheticHighwaySceneGenerator:
     """
     Generates realistic synthetic 1080p/720p dashcam video frames with
-    ground truth lane markings, vehicles, and synchronized InnoSenT 77 GHz FMCW radar tracks.
+    ground truth lane markings, vehicles, and synchronized 77 GHz FMCW radar tracks.
     """
     def __init__(self, calib: CalibrationParams):
         self.calib = calib
@@ -830,7 +830,7 @@ class SyntheticHighwaySceneGenerator:
             ttc_sec=999.0
         )
 
-        # 6. Synchronized 77 GHz FMCW Radar Track from InnoSenT EKF Tracker
+        # 6. Synchronized 77 GHz FMCW Radar Track from 77 GHz EKF Tracker
         # Coordinate system: X=lateral (+right), Y=longitudinal (+forward), Z=elevation (+up from bumper)
         lead_radar_track = RadarTrackInput(
             track_id=1,

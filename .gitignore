@@ -5,11 +5,12 @@ __pycache__/
 *.so
 .Python
 
-# Virtual Environment
+# Virtual Environment & Wheels
 .venv/
 venv/
 env/
 ENV/
+.wheels/
 
 # Jupyter
 .ipynb_checkpoints/
@@ -39,3 +40,4 @@ compile_commands.json
 Thumbs.db
 Desktop.ini
 .DS_Store
+

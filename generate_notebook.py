@@ -15,12 +15,12 @@ cells = []
 # ==============================================================================
 cells.append(nbf.v4.new_markdown_cell("""# AutoVision-ADAS: Real-Time Computer Vision & Camera-Radar Perception Stack
 ## Automotive SAE Level 2+ / Level 3 Perception, Lane Geometry, Monocular Distance & 77 GHz Radar Fusion
-### Document ID: `PROP-OPENCV-ADAS-001` | Complementary to InnoSenT 77 GHz Radar Tracker (`SPEC-SW-RADAR-TRK-001`)
+### Document ID: `PROP-OPENCV-ADAS-001` | Complementary to 77 GHz FMCW Radar Tracker (`SPEC-SW-RADAR-TRK-001`)
 
 ---
 
 ### Executive Summary & System Vision
-**AutoVision-ADAS** is an industrial-grade computer vision perception system designed for autonomous driving and advanced driver assistance systems (ADAS). Built on **OpenCV** and integrated with the **InnoSenT 77 GHz FMCW Radar Multi-Target Tracker**, this stack extracts actionable environmental intelligence from automotive front cameras:
+**AutoVision-ADAS** is an industrial-grade computer vision perception system designed for autonomous driving and advanced driver assistance systems (ADAS). Built on **OpenCV** and integrated with the **77 GHz FMCW Radar Multi-Target Tracker**, this stack extracts actionable environmental intelligence from automotive front cameras:
 1. **Road Geometry & Lane Boundaries:** Adaptive color-space thresholding (HLS/LAB), Inverse Perspective Mapping (Bird's-Eye View), sliding window search, 2nd-order polynomial fitting, road radius of curvature, and Lane Departure Warning (LDW).
 2. **Dynamic Obstacle Perception:** 2D bounding boxes and pseudo-3D wireframes with class categorization.
 3. **Monocular Distance & Optical Flow TTC:** Pinhole camera geometry and scale-expansion Time-to-Collision estimation.
@@ -53,7 +53,7 @@ cells.append(nbf.v4.new_markdown_cell("""# AutoVision-ADAS: Real-Time Computer V
 |                                   v                                                   |
 |   +-------------------------------------------------------------------------------+   |
 |   | 4. CAMERA-RADAR SPATIAL FUSION (Extrinsics [R|t] & Calibration Matrix K)     |   |
-|   |    * Ingest 77 GHz Radar Tracks (x, y, vx, vy) from InnoSenT EKF Tracker      |   |
+|   |    * Ingest 77 GHz Radar Tracks (x, y, vx, vy) from 77 GHz EKF Tracker        |   |
 |   |    * P_proj = K * [R | t] * X_radar                                           |   |
 |   |    * IoU Bounding Box Association & Sensor State Fusion                       |   |
 |   +-------------------------------------------------------------------------------+   |
@@ -383,10 +383,10 @@ plt.show()
 # ==============================================================================
 # Cell 11: Module 5 Theory: Extrinsic Camera-Radar Sensor Fusion
 # ==============================================================================
-cells.append(nbf.v4.new_markdown_cell("""## 5. Camera-Radar Sensor Fusion (The InnoSenT 77 GHz Synergy)
+cells.append(nbf.v4.new_markdown_cell("""## 5. Camera-Radar Sensor Fusion (77 GHz FMCW Radar Synergy)
 
 ### 5.1 The Sensor Synergy Imperative
-| Feature | Automotive Camera (OpenCV) | InnoSenT 77 GHz FMCW Radar | Fused Perception Stack |
+| Feature | Automotive Camera (OpenCV) | 77 GHz FMCW Radar | Fused Perception Stack |
 | :--- | :--- | :--- | :--- |
 | **Angular Resolution** | **High ($\sim 0.05^{\circ}$)** | Moderate ($\sim 1^{\circ}$ - $3^{\circ}$) | **High angular localization** |
 | **Semantic Classification**| **Rich (Vehicle, Pedestrian, Bike)**| None (Point clusters / RCS) | **Semantic labels preserved** |
@@ -395,7 +395,7 @@ cells.append(nbf.v4.new_markdown_cell("""## 5. Camera-Radar Sensor Fusion (The I
 | **Adverse Weather (Fog/Glare)**| Degraded performance | **Uncompromised performance** | **All-weather robustness** |
 
 ### 5.2 3D-to-2D Radar Point Projection
-Let $\\mathbf{X}_R = [X_R, Y_R, Z_R]^T$ be a 3D track from the InnoSenT FMCW radar tracker (in vehicle bumper coordinates).
+Let $\\mathbf{X}_R = [X_R, Y_R, Z_R]^T$ be a 3D track from the 77 GHz FMCW radar tracker (in vehicle bumper coordinates).
 The point is transformed into the camera coordinate system via extrinsic rotation $\\mathbf{R}$ and translation $\\mathbf{t}$:
 
 $$\\begin{bmatrix} X_c \\\\ Y_c \\\\ Z_c \\end{bmatrix} = \\mathbf{R} \\begin{bmatrix} X_R \\\\ Y_R \\\\ Z_R \\end{bmatrix} + \\mathbf{t}$$
@@ -653,10 +653,10 @@ Compliance with performance target ($\ge 30\,\text{FPS}$, $\le 33\,\text{ms}$ pe
 
 ---
 
-### Conclusion & Synergy with InnoSenT Radar Tracker
+### Conclusion & Synergy with 77 GHz FMCW Radar Tracker
 This implementation validates the unified perception architecture required for modern Euro NCAP 5-star ADAS:
 * **Passive vision** handles rich road geometry, lane departure warnings, and semantic object classification.
-* **InnoSenT 77 GHz FMCW Radar** provides uncompromised metric distance, direct radial Doppler velocity, and immunity to blinding glare or adverse weather.
+* **77 GHz FMCW Radar** provides uncompromised metric distance, direct radial Doppler velocity, and immunity to blinding glare or adverse weather.
 * The fused state vector directly drives life-critical Forward Collision Warning (FCW) and Autonomous Emergency Braking (AEB).
 """))
 

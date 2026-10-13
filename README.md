@@ -5,7 +5,7 @@
 | **Document ID** | `PROP-OPENCV-ADAS-001` |
 | **Implementation** | Python 3.10+ / C++17 OpenCV Stack & Interactive Jupyter Notebook |
 | **Target Domain** | Automotive ADAS (SAE Level 2+ / Level 3 Perception) |
-| **Complementary Tracker** | InnoSenT 77 GHz FMCW Radar Multi-Target Tracker ([specification.md](file:///c:/Users/Mourad/Desktop/MOURADCV/InnoSent/specification.md)) |
+| **Complementary Tracker** | 77 GHz FMCW Radar Multi-Target Tracker ([SPEC-SW-RADAR-TRK-001](https://github.com/mouradism/kalman)) |
 | **Performance Target** | Real-time processing at $\ge 30\,\text{FPS}$ ($\le 33\,\text{ms}$ per frame) on 1080p/720p automotive streams |
 
 ---
@@ -47,7 +47,7 @@
 |                                   v                                                   |
 |   +-------------------------------------------------------------------------------+   |
 |   | 4. CAMERA-RADAR SPATIAL FUSION (Extrinsics [R|t] & Calibration Matrix K)     |   |
-|   |    * Ingest 77 GHz Radar Tracks (x, y, vx, vy) from InnoSenT EKF Tracker      |   |
+|   |    * Ingest 77 GHz Radar Tracks (x, y, vx, vy) from 77 GHz EKF Tracker        |   |
 |   |    * P_proj = K * [R | t] * X_radar                                           |   |
 |   |    * IoU Bounding Box Association & Sensor State Fusion                       |   |
 |   +-------------------------------------------------------------------------------+   |
@@ -97,7 +97,7 @@ The repository features a fully evaluated, self-contained **Jupyter Notebook** (
 * **Section 3: Inverse Perspective Mapping (IPM):** Bird's-Eye View top-down transformation and unwarp projection.
 * **Section 4: Sliding Window Search & Polynomial Fitting:** Histogram peak detection, sliding window centroid tracking, 2nd-degree polynomial curve fitting ($x = A y^2 + B y + C$), road radius of curvature ($R_{\text{curve}}$), and vehicle lateral offset.
 * **Section 5: Monocular Distance & Optical Expansion TTC:** Pinhole distance formula and optical flow area expansion rate.
-* **Section 6: Camera-Radar Sensor Fusion (InnoSenT Synergy):** Extrinsic projection $[R \mid t]$, spatial gating, Doppler velocity integration, and state fusion table.
+* **Section 6: Camera-Radar Sensor Fusion (77 GHz Radar Synergy):** Extrinsic projection $[R \mid t]$, spatial gating, Doppler velocity integration, and state fusion table.
 * **Section 7: Augmented Reality HUD Multi-Scenario Simulation:** High-resolution HUD gallery comparing Normal Driving, Lane Departure Warning, and Emergency Collision Imminent (AEB engaged).
 * **Section 8: Multi-Frame Dynamic Simulation & TTC Horizon:** 50-frame highway braking sequence with dynamic time-series curves for Range, Doppler Velocity, TTC countdown, and Warning triggers.
 * **Section 9: Industrial Benchmarking & Latency Analysis:** Comprehensive latency budget table across all perception stages.
@@ -208,9 +208,9 @@ $$\text{TTC}_{\text{fused}} = \begin{cases}
 
 ---
 
-## 7. Synergy with InnoSenT 77 GHz FMCW Radar Multi-Target Tracker
+## 7. Synergy with 77 GHz FMCW Radar Multi-Target Tracker
 
-By fusing front-facing monocular computer vision with the **InnoSenT 77 GHz FMCW Radar Multi-Target Tracker** ([specification.md](file:///c:/Users/Mourad/Desktop/MOURADCV/InnoSent/specification.md)), this system overcomes the primary weaknesses of standalone sensors:
+By fusing front-facing monocular computer vision with the **77 GHz FMCW Radar Multi-Target Tracker** ([SPEC-SW-RADAR-TRK-001](https://github.com/mouradism/kalman)), this system overcomes the primary weaknesses of standalone sensors:
 
 * **Camera Alone:** High angular resolution and semantic classification, but noisy longitudinal range and susceptibility to blinding direct glare, fog, and rain.
 * **Radar Alone:** Centimeter range accuracy and direct Doppler velocity unaffected by weather, but coarse angular resolution and absence of semantic classification.
